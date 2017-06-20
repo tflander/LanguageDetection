@@ -51,12 +51,7 @@ public class AsciiDictionaryReaderTest {
 		if(matcher.matches()) {
 			Integer memorySize = new Integer(matcher.group(1));
 			String memoryUnit = matcher.group(2);
-			if(!memoryUnit.equalsIgnoreCase("M")) {
-				throw new IllegalStateException("Memory Unit must be M, found " + memoryConfig);
-			}
-			if(memorySize > maxMemoryInMb) {
-				throw new IllegalStateException("Memory Size must be at most " + maxMemoryInMb + ", found " + memoryConfig);
-			}
+			validateMemorySizeAndUnit(memorySize, memoryUnit, maxMemoryInMb);
 		} else {
 			throw new IllegalStateException("unexpected error matching regex");
 		}
@@ -70,5 +65,15 @@ public class AsciiDictionaryReaderTest {
 				.findFirst()
 				.orElseThrow(() -> new IllegalStateException("-Xmx argument not set"));
 	}
+	
+	private void validateMemorySizeAndUnit(Integer memorySize, String memoryUnit, Integer maxMemoryInMb) {
+		if(!memoryUnit.equalsIgnoreCase("M")) {
+			throw new IllegalStateException("Memory Unit must be M, found " + memoryUnit);
+		}
+		if(memorySize > maxMemoryInMb) {
+			throw new IllegalStateException("Memory Size must be at most " + maxMemoryInMb + ", found " + memorySize);
+		}
+	}
+
 			
 }
