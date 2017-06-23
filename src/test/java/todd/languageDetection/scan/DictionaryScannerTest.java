@@ -1,9 +1,15 @@
 package todd.languageDetection.scan;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.*;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.Period;
+import java.time.temporal.TemporalAmount;
+import java.time.temporal.TemporalUnit;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,13 +23,31 @@ public class DictionaryScannerTest {
 	
 	private static final Integer MAX_MEMORY_IN_MB = 20;
 	
+	private DictionaryScanner createScanner() {
+		// TODO: use a more memory efficient DictionaryScanner to allow running in 20MB
+		//  It also must run fast
+		return new AsciiDictionaryScanner("words_alpha.txt");
+// 		return new LazyDictionaryScanner("words_alpha.txt");
+	}
+	
 	@Test
 	public void scansDictionary() throws Exception {
-		// TODO: use a more memory efficient DictionaryScanner to allow running in 20MB
-		final DictionaryScanner scanner = new AsciiDictionaryScanner("words_alpha.txt");
+		DictionaryScanner scanner = createScanner();
 		assertThat(scanner.containsAll("pancake", "house", "bacon")).isTrue();
 		assertThat(scanner.containsAll("pancake", "house", "bacon", "kjhkjh")).isFalse();
 		assertThat(scanner.containsMost("pancake", "house", "bacon", "kjhkjh")).isTrue();
+	}
+	
+	@Test
+	public void runsFast() throws Exception {
+		DictionaryScanner scanner = createScanner();
+		LocalDateTime start = LocalDateTime.now();
+		for(int i=0; i < 100; ++i) {
+			assertThat(scanner.containsAll("pancake", "house", "bacon")).isTrue();			
+		}
+		
+		Duration elapsed = Duration.between(start, LocalDateTime.now());
+		assertThat(elapsed.toMillis()).isLessThan(1000);
 	}
 	
 	@Test
