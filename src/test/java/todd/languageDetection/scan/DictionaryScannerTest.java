@@ -1,15 +1,12 @@
 package todd.languageDetection.scan;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.fail;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.Period;
-import java.time.temporal.TemporalAmount;
-import java.time.temporal.TemporalUnit;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -64,7 +61,7 @@ public class DictionaryScannerTest {
 			String memoryUnit = matcher.group(2);
 			validateMemorySizeAndUnit(memorySize, memoryUnit, maxMemoryInMb);
 		} else {
-			throw new IllegalStateException("unexpected error matching regex");
+			fail("unexpected error matching regex");
 		}
 	}
 
@@ -79,10 +76,10 @@ public class DictionaryScannerTest {
 	
 	private void validateMemorySizeAndUnit(Integer memorySize, String memoryUnit, Integer maxMemoryInMb) {
 		if(!memoryUnit.equalsIgnoreCase("M")) {
-			throw new IllegalStateException("Memory Unit must be M, found " + memoryUnit);
+			fail("Memory Unit must be M, found " + memoryUnit);
 		}
 		if(memorySize > maxMemoryInMb) {
-			throw new IllegalStateException("Memory Size must be at most " + maxMemoryInMb + ", found " + memorySize);
+			fail("Memory Size must be at most " + maxMemoryInMb + ", found " + memorySize);
 		}
 	}
 
