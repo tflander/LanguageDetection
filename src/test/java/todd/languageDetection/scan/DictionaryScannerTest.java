@@ -23,8 +23,9 @@ public class DictionaryScannerTest {
 	private DictionaryScanner createScanner() {
 		// TODO: use a more memory efficient DictionaryScanner to allow running in 20MB
 		//  It also must run fast
-		return new AsciiDictionaryScanner("words_alpha.txt");
+//		return new AsciiDictionaryScanner("words_alpha.txt");
 // 		return new LazyDictionaryScanner("words_alpha.txt");
+		return new BloomDictionaryScanner("words_alpha.txt");
 	}
 	
 	@Test
