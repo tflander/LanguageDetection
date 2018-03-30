@@ -71,7 +71,7 @@ public class DictionaryScannerTest {
 		return arguments.stream()
 				.filter(argument -> argument.startsWith("-Xmx"))
 				.findFirst()
-				.orElseThrow(() -> new IllegalStateException("-Xmx argument not set"));
+				.orElseThrow(() -> new IllegalStateException("-Xmx argument not set. Hint -- uncomment memory setting in build.gradle"));
 	}
 	
 	private void validateMemorySizeAndUnit(Integer memorySize, String memoryUnit, Integer maxMemoryInMb) {
