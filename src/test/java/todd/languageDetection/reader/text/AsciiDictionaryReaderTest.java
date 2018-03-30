@@ -5,9 +5,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Set;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
-
+@Ignore // disable test for low memory config
 public class AsciiDictionaryReaderTest {
 
 	private AsciiDictionaryReader asciiDictionaryReader;
