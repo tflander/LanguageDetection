@@ -26,7 +26,11 @@ public class DictionaryScannerTest {
 		return new AsciiDictionaryScanner("words_alpha.txt");
 // 		return new LazyDictionaryScanner("words_alpha.txt");
 	}
-	
+
+	/*********************************************************
+	*** Important!  Do not modify any code below this line ***
+	 ********************************************************* */
+
 	@Test
 	public void scansDictionary() throws Exception {
 		DictionaryScanner scanner = createScanner();
