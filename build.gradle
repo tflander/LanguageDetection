@@ -13,10 +13,9 @@ repositories {
     jcenter()
 }
 
-// TODO: Restrict tests to 20MB heap
-//tasks.withType(Test) {
-//    jvmArgs = ['-Xms20m', '-Xmx20m']
-//}
+tasks.withType(Test) {
+    jvmArgs = ['-Xms20m', '-Xmx20m']
+}
 
 dependencies {
     compile 'com.google.guava:guava:20.0'
