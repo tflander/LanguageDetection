@@ -12,6 +12,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.junit.Test;
+import todd.languageDetection.bloom.BloomDictionaryScanner;
 
 /*
  * Important!  Run this test with the JVM argument -Xmx20M 

@@ -19,7 +19,12 @@ public class DictionaryBloomFilter {
     }
 
     public boolean contains(String... words) {
-        return false;
+        for(String word : words) {
+            if(!bitSet.get(posByHash.getPosForWord(word))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public boolean hasWord(String word) {
