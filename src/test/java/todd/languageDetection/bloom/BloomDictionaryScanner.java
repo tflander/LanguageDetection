@@ -9,7 +9,7 @@ public class BloomDictionaryScanner implements DictionaryScanner {
 
     public BloomDictionaryScanner(String dictionaryFilename) {
         BloomDictionaryReader dictionaryReader = new BloomDictionaryReader();
-        filter = dictionaryReader.read(dictionaryFilename, 370000 * 8);
+        filter = dictionaryReader.read(dictionaryFilename, 370000 * 64);
     }
 
     @Override
